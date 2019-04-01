@@ -1,4 +1,4 @@
-package util;
+package com.tkq.yunshuidi.util;
 
 import org.springframework.core.io.ClassPathResource;
 
@@ -92,7 +92,7 @@ public class ImgCode {
             e.printStackTrace();
         }
 
-        xx = width / (codeCount+1 );  //生成随机数的水平距离
+        xx = width / (codeCount);  //生成随机数的水平距离
         fontHeight = height - 4;      //生成随机数的数字高度
 
         // 创建一个随机数生成器类
@@ -154,18 +154,29 @@ public class ImgCode {
         // 设置字体。
         gd.setFont(font);
         // 随机产生codeCount数字的验证码。
-        for (int i = 0; i < codeCount; i++) {
+        for (int i = 1; i <= codeCount; i++) {
             // 得到随机产生的验证码数字。
             String strRand = String.valueOf(codeSequence[random.nextInt(27)]);
             // 用随机产生的颜色将验证码绘制到图像中。
             randomColor(gd,150,150,150,255);
             radianPercent = Math.PI * (random.nextInt(30) / 180D);
-            if (random.nextBoolean()) radianPercent = -radianPercent;
-            int codeY = height-random.nextInt(16);
-            int codeX = (i + 1) * xx;
-            gd.rotate(radianPercent,codeX , codeY);
+            if (random.nextBoolean()) {
+                radianPercent = -radianPercent;
+            }
+            int codeY = height - random.nextInt(height/4);
+            int codeX = (i -1 ) * xx ;
+            if(i == 1){
+                codeX = xx /5;
+            }else if(i == codeCount){
+                codeX -= xx/5;
+            }
+            if(i < codeCount) {
+                gd.rotate(radianPercent, codeX, codeY);
+            }
             gd.drawString(strRand, codeX,  codeY);
-            gd.rotate(-radianPercent, codeX, codeY);
+            if(i < codeCount) {
+                gd.rotate(-radianPercent, codeX, codeY);
+            }
             // 将产生的四个随机数组合在一起。
             randomCode.append(strRand);
         }
