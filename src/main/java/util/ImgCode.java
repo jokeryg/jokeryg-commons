@@ -1,4 +1,4 @@
-package com.tkq.yunshuidi.util;
+package util;
 
 import org.springframework.core.io.ClassPathResource;
 
