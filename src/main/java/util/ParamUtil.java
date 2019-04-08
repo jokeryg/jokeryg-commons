@@ -77,4 +77,38 @@ public class ParamUtil {
         }
         return paramUtil;
     }
+
+
+    /**
+     * 常见参数处理
+     * @param no 页码，如果参数无效则默认为第一页
+     * @param size 每页显示数量，如果参数无效默认为系统设置
+     * @return 处理后的实体
+     */
+    public static ParamUtil handle(String no,String size) {
+        return handle(no,size,null,null,null);
+    }
+
+    /**
+     * 常见参数处理
+     * @param no 页码，如果参数无效则默认为第一页
+     * @param size 每页显示数量，如果参数无效默认为系统设置
+     * @param startTime 开始时间，如果不为空则在后边增加 00:00:00
+     * @param endTime 结束时间，如果不为空则在后边增加 23:59:59
+     * @return 处理后的实体
+     */
+    public static ParamUtil handle(String no,String size,String startTime,String endTime) {
+        return handle(no,size,startTime,endTime,null);
+    }
+
+    /**
+     * 常见参数处理
+     * @param no 页码，如果参数无效则默认为第一页
+     * @param size 每页显示数量，如果参数无效默认为系统设置
+     * @param trimStrings 需要trim的字符串吧列表，返回的实体中的list按照跟传入顺序一致
+     * @return 处理后的实体
+     */
+    public static ParamUtil handle(String no,String size,String...trimStrings) {
+        return handle(no,size,null,null,trimStrings);
+    }
 }
