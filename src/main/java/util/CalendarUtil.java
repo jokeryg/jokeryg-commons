@@ -1,5 +1,6 @@
 package util;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -63,5 +64,83 @@ public class CalendarUtil {
             lDate.add(calBegin.getTime());
         }
         return lDate;
+    }
+
+    /**
+     * 以一个时间为基础设置时间，字段为空则不改变
+     * @param date 要设置的时间,不能为空
+     * @param year 年份,为空则不变
+     * @param month 月份(1-12),为空则不变
+     * @param day 天,为空则不变
+     * @param hour 小时(0-23),为空则不变
+     * @param minute 分钟(0-59),为空则不变
+     * @param second 秒,为空则不变
+     * @param millisecond 毫秒,为空则不变
+     */
+    public static void setDate(Calendar date, Integer year, Integer month, Integer day, Integer hour, Integer minute, Integer second, Integer millisecond){
+        if(date == null){
+            return;
+        }
+        if(year != null){
+            date.set(Calendar.YEAR,year);
+        }
+        if(month != null){
+            date.set(Calendar.MONTH,month-1);
+        }
+        if(day != null){
+            date.set(Calendar.DAY_OF_MONTH,day);
+        }
+        if(hour != null){
+            date.set(Calendar.HOUR_OF_DAY,hour);
+        }
+        if(minute != null){
+            date.set(Calendar.MINUTE,minute);
+        }
+        if(second != null){
+            date.set(Calendar.SECOND,second);
+        }
+        if(millisecond != null){
+            date.set(Calendar.MILLISECOND,millisecond);
+        }
+
+    }
+
+    /**
+     * 将source上指定的时间段克隆到target相应时间段上
+     * @param source 源,不能为空
+     * @param target 目标，不能为空
+     * @param year 是否克隆年份
+     * @param month 是否克隆月份
+     * @param day 是否克隆天
+     * @param hour 是否克隆小时
+     * @param minute 是否克隆分钟
+     * @param second 是否克隆秒
+     * @param millisecond 是否克隆毫秒
+     */
+    public static void cloneDate(Calendar source,Calendar target,boolean year,boolean month,boolean day, boolean hour, boolean minute, boolean second, boolean millisecond){
+        if(source == null || target == null){
+            return;
+        }
+        if(year){
+            target.set(Calendar.YEAR,source.get(Calendar.YEAR));
+        }
+        if(month){
+            target.set(Calendar.MONTH,source.get(Calendar.MONTH));
+        }
+        if(day){
+            target.set(Calendar.DAY_OF_MONTH,source.get(Calendar.DAY_OF_MONTH));
+        }
+        if(hour){
+            target.set(Calendar.HOUR_OF_DAY,source.get(Calendar.HOUR_OF_DAY));
+        }
+        if(minute){
+            target.set(Calendar.MINUTE,source.get(Calendar.MINUTE));
+        }
+        if(second){
+            target.set(Calendar.SECOND,source.get(Calendar.SECOND));
+        }
+        if(millisecond){
+            target.set(Calendar.MILLISECOND,source.get(Calendar.MILLISECOND));
+        }
     }
 }
