@@ -117,7 +117,8 @@ public class CalendarUtil {
      * @param second 是否克隆秒
      * @param millisecond 是否克隆毫秒
      */
-    public static void cloneDate(Calendar source,Calendar target,boolean year,boolean month,boolean day, boolean hour, boolean minute, boolean second, boolean millisecond){
+    public static void cloneDate(Calendar source,Calendar target,boolean year,boolean month,boolean day
+            , boolean hour, boolean minute, boolean second, boolean millisecond){
         if(source == null || target == null){
             return;
         }

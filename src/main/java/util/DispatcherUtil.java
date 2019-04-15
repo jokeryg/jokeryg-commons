@@ -42,6 +42,10 @@ public class DispatcherUtil {
         FlashMap flashMap = new FlashMap();
         flashMap.put("msg", msg);
         flashMap.put("url", url);
+        if(request.getParameter("close")!=null){
+            flashMap.put("close",request.getParameter("close"));
+        }
+
         FlashMapManager flashMapManager = RequestContextUtils.getFlashMapManager(request);
         flashMapManager.saveOutputFlashMap(flashMap, request, response);
         try {
