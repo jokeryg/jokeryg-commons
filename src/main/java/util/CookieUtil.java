@@ -80,6 +80,6 @@ public class CookieUtil {
     }
 
     public static void removeCookie(String name, HttpServletRequest request, HttpServletResponse response) {
-        CookieUtil.removeCookie(name, ".dhgate.com", request, response);
+        CookieUtil.removeCookie(name, null, request, response);
     }
 }
