@@ -181,6 +181,17 @@ public class StringUtil {
 
 
     /**
+     * 判断字符串是否只有字母和数字
+     * @param str
+     * @return
+     */
+    public static boolean isLetterDigit(String str) {
+        String regex = "^[a-z0-9A-Z]+$";
+        return str.matches(regex);
+    }
+
+
+    /**
      * 使用java正则表达式去掉多余的.与0
      * @param s
      * @return
