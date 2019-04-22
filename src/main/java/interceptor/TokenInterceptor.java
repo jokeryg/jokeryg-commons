@@ -44,11 +44,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         return super.preHandle(request, response, handler);
     }
 
-    private void createToken(HttpServletRequest request) {
+    public static String createToken(HttpServletRequest request) {
         IdWorker idWorker = IdWorker.getInstance();
         String token = PC_TOKEN_PREFIX + idWorker.nextId();
         request.getSession().setAttribute(token, "0");
         request.setAttribute("token", token);
+        return token;
     }
 
     @Override
