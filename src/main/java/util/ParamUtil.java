@@ -20,7 +20,7 @@ public class ParamUtil {
      */
     @Getter
     @Setter
-    private int pageSizeLimit = 15;
+    private int pageSizeLimit = 5;
 
     @Getter
     private int pageNo = 1;
