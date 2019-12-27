@@ -29,10 +29,19 @@ public class APIResult<T> {
         this.responseCode = apiCode.getCode();
     }
 
+
+    /**
+     * 成功
+     * @return 只返回成功码
+     */
+    public static APIResult success(){
+        return new APIResult();
+    }
+
     /**
      * 成功
      * @param result 返回的实体
-     * @return APIResult
+     * @return 成功码+实体
      */
     public static APIResult success(Object result){
         return APIResult.builder().result(result).build();
@@ -43,7 +52,7 @@ public class APIResult<T> {
      * 错误
      * @param apiCode 返回码
      * @param errorMsg 错误信息描述
-     * @return APIResult
+     * @return 错误码+错误信息
      */
     public static APIResult error(APICode apiCode, String errorMsg){
         return APIResult.builder().responseCode(apiCode.getCode()).errorMsg(errorMsg).build();
