@@ -3,6 +3,7 @@ package model;
 import com.google.gson.Gson;
 import enums.APICode;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.lang.reflect.Type;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class APIResult<T> {
     private static final Gson gson = new Gson();
 
@@ -28,35 +30,26 @@ public class APIResult<T> {
     }
 
     /**
-     * 业务参数错误
-     * @param errorMsg 错误信息描述
+     * 成功
+     * @param result 返回的实体
+     * @return APIResult
      */
-    public void paramError(String errorMsg){
-        error(APICode.业务参数错误,errorMsg);
+    public static APIResult success(Object result){
+        return APIResult.builder().result(result).build();
     }
 
-    /**
-     * 返回错误
-     * @param apiCode 返回码
-     * @param errorMsg 错误信息描述
-     */
-    public void error(APICode apiCode,String errorMsg){
-        setAll(apiCode,errorMsg,null,null);
-    }
 
     /**
-     * 设置所有字段
+     * 错误
      * @param apiCode 返回码
-     * @param errorMsg 错误时错误信息描述
-     * @param token
-     * @param result 返回对象
+     * @param errorMsg 错误信息描述
+     * @return APIResult
      */
-    public void setAll(APICode apiCode,String errorMsg,String token,T result){
-        this.responseCode = apiCode.getCode();
-        this.errorMsg = errorMsg;
-        this.result = result;
-        this.token = token;
+    public static APIResult error(APICode apiCode, String errorMsg){
+        return APIResult.builder().responseCode(apiCode.getCode()).errorMsg(errorMsg).build();
     }
+
+
 
     /**
      * 将当前实体转为Json
